@@ -24,7 +24,7 @@
 資料寫入
 -------
 
-**Fhir - Patient**
+**Fhir - Patient**（if not exist）
 - id: examOrder.patId
 - name: examOrder.patName
 - gender: examOrder.sex
