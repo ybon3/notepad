@@ -11,7 +11,7 @@
 
 已經確認的事項：
 
-- 對 gwtRepor 來說，是因為回傳的資料不是預期的 xml 格式而導致錯誤
+- 對 `FooGwtRepo` 來說，是因為回傳的資料不是預期的 xml 格式而導致錯誤
 - 跟 [DomainResource.text](http://hl7.org/fhir/domainresource-definitions.html#DomainResource.text) 這個 [Narrative](http://hl7.org/fhir/narrative.html#Narrative) 型態有關，如果新增時沒有給值（不論是什麼值），產生出來的資料在單筆讀取時會只顯示 `DomainResource.text` 的內容，而非預期的 xml
 - 新增 Resource 時，是否有把那些必須有值的欄位給值，跟這個問題似乎有關
 - 目前的 workaround：在 DxReport 新增時提供 `text.status` 的值（甚麼值好像不影響），就算 `DomainResource.text` 還是顯示 `No narrative available ...` 但運作會正常，不會導致資料回傳時的錯誤
