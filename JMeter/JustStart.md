@@ -14,6 +14,14 @@ jar import by pom.xml:
   ```
 
 
+註 1：
+透過 GUI 可以設定每一個 `Java Request` 要執行的 class （extends `AbstractJavaSamplerClient`），
+實際上在跑的時候，設定的每一個 Thread 都會 new 一個 instance。
+
+註 2：
+Thread Group 中的迴圈其實並沒有一值產生新的 Thread，而是重複的執行 `AbstractJavaSamplerClient.runTest()`
+
+
 中文引導教學
 -----------
 
