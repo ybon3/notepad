@@ -18,3 +18,11 @@ https://gist.github.com/kuc/82630d56f47838d9ecf7
 https://www.developer.com/java/data/how-to-add-java-print-services-to-your-java-application.html
 
 
+#### Extended printer information in Java
+
+https://stackoverflow.com/questions/5567709/extended-printer-information-in-java
+
+
+#### How to access the status of the printer?
+
+https://stackoverflow.com/questions/16035739/how-to-access-the-status-of-the-printer
