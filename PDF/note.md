@@ -26,3 +26,13 @@ https://stackoverflow.com/questions/5567709/extended-printer-information-in-java
 #### How to access the status of the printer?
 
 https://stackoverflow.com/questions/16035739/how-to-access-the-status-of-the-printer
+
+
+#### java PrinterJob not printing to fit paper
+
+https://stackoverflow.com/questions/27029166/java-printerjob-not-printing-to-fit-paper
+
+
+#### How can I print a custom paper size (cheques 8“ x 4”)?
+
+https://stackoverflow.com/questions/13558152/how-can-i-print-a-custom-paper-size-cheques-8-x-4
