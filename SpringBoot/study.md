@@ -4,6 +4,8 @@
 
 [Packaging Executable Jar and War Files](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#build-tool-plugins-maven-packaging)
 
+[Hello Spring Security with Boot](https://docs.spring.io/spring-security/site/docs/current/guides/html5/helloworld-boot.html)
+
 - - - -
 
 [Spring Boot Reference Guide 2.0.2](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
