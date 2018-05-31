@@ -1,0 +1,10 @@
+[Spring 教學(1) - 從 Spring Boot 開始](http://peaceful-developer.blogspot.com/2014/08/spring-1-spring-boot.html)
+
+[Deploying a Spring Boot app to Azure](https://spring.io/guides/gs/spring-boot-for-azure/)
+
+[Packaging Executable Jar and War Files](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#build-tool-plugins-maven-packaging)
+
+- - - -
+
+[Spring Boot Reference Guide 2.0.2](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
+
