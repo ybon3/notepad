@@ -17,3 +17,5 @@
 
 [Is it safe to store sensitive data in JWT Payload?](https://stackoverflow.com/questions/43496821/is-it-safe-to-store-sensitive-data-in-jwt-payload)
 
+Search key word: `jwt token sensitive info` `jwt token is secure`
+
