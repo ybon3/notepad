@@ -17,3 +17,7 @@
 
 https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
 
+
+# Converting a Spring Boot JAR Application to a WAR
+
+https://spring.io/guides/gs/convert-jar-to-war/
