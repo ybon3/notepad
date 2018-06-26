@@ -12,3 +12,8 @@
 
 [Spring Boot Reference Guide 2.0.2](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
 
+
+# Exception Handling in Spring MVC
+
+https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
+
