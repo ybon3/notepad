@@ -77,3 +77,19 @@ mvn dockerfile:build
 ```
 mvn dockerfile:push
 ```
+
+
+後續
+----
+
+### Using Spring Profiles
+
+```console
+docker run -e "SPRING_PROFILES_ACTIVE=prod" -p 8080:8080 -t springio/gs-spring-boot-docker
+```
+
+or
+
+```console
+docker run -e "SPRING_PROFILES_ACTIVE=dev" -p 8080:8080 -t springio/gs-spring-boot-docker
+```
