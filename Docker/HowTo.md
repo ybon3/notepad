@@ -19,6 +19,17 @@ DOCKER_OPTS="$DOCKER_OPTS --insecure-registry=192.168.2.170:5000"
 
 ### 從指定的 Registry pull image
 
-```
+```console
 docker pull --allow-insecure internal.company.domain:5000/image_name
+```
+
+
+### Remove all images and containers
+
+```console
+docker rm $(docker ps -a -q)
+```
+
+```console
+docker rmi $(docker images -q)
 ```
