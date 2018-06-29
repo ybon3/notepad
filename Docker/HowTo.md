@@ -33,3 +33,10 @@ docker rm $(docker ps -a -q)
 ```console
 docker rmi $(docker images -q)
 ```
+
+
+### Login to a private registry
+
+```console
+docker login localhost:8080
+```
