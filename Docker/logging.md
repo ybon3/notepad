@@ -1,3 +1,11 @@
+先說結論，主要有兩種選擇：
+
+1. 設定 log 的路徑，並將檔案路徑經由 VOLUME 設定到 OS 層提供存取
+2. 啟用 syslog 並將 log 吐給 syslog
+
+目前先採用 1. 的做法
+
+
 Docker container 的資料夾 Mount 設定
 -----------------------------------
 
@@ -56,3 +64,7 @@ docker run --name CONTAINER_NAME -v /c/Users/TB890057/tmp4docker:/tmp -p 8090:80
 - [Docker Doc: Configure logging drivers](https://docs.docker.com/config/containers/logging/configure/)
 
 - [docker学习笔记18：Dockerfile 指令 VOLUME 介绍](https://www.cnblogs.com/51kata/p/5266626.html)
+
+- [Docker volume 簡單用法](https://julianchu.net/2016/04/19-docker.html)
+
+- [入理解Docker Volume（一）](http://dockone.io/article/128)
