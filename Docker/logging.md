@@ -15,6 +15,29 @@ docker run -p 8090:8090 -v /mnt/orderms:/tmp dante0312/orderms
 所有對 `/mnt/orderms` 資料夾中的存取行為等同對 container 中的 `/tmp` 進行存取。
 
 
+### Dockerfile 的 VOLUME 設定
+
+VOLUME 設定值**無法**指定 OS 層的實體路徑，對應的路徑由 Docker 產生，  
+可使用下列命令調閱：
+
+```console
+docker inspect --format='{{.Mounts}}' $(docker ps -q) CONTAINER_ID
+```
+
+VOLUME 設定範例：
+
+```
+VOLUME /tmp
+```
+
+
+設定多個 
+
+```
+VOLUME ["/data1","/data2"]
+```
+
+
 參考文件
 -------
 
