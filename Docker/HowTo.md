@@ -35,6 +35,16 @@ docker rmi $(docker images -q)
 ```
 
 
+> `$(...)` 可以執行另一個指令，並將結果作為參數給主要指令使用
+
+
+### 查閱 container 運作的詳細設定值
+
+```console
+docker inspect $(docker ps -q)
+```
+
+
 ### Login to a private registry
 
 ```console
