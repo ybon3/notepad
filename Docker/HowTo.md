@@ -30,7 +30,7 @@ docker pull --allow-insecure internal.company.domain:5000/image_name
 docker rm $(docker ps -a -q)
 ```
 
-```console
+```
 docker rmi $(docker images -q)
 ```
 
@@ -42,6 +42,13 @@ docker rmi $(docker images -q)
 
 ```console
 docker inspect $(docker ps -q)
+```
+
+
+取得 "Mounts" 的設定值
+
+```
+docker inspect --format='{{.Mounts}}' $(docker ps -q)
 ```
 
 
