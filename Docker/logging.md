@@ -38,6 +38,16 @@ VOLUME ["/data1","/data2"]
 ```
 
 
+### Windows 7 搭配 ToolBox 的環境
+
+~~懶得囉嗦了~~參考下列命令吧 ...
+
+```
+docker run --name CONTAINER_NAME -v /c/Users/TB890057/tmp4docker:/tmp -p 8090:8090 dante0312/orderms
+```
+
+
+
 參考文件
 -------
 
