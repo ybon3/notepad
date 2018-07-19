@@ -19,6 +19,12 @@ $ systemctl status docker
            └─51959 /usr/bin/docker-containerd-current -l unix:///var/run/docker/libcontainerd/docker-containerd.sock --metr...
 ```
 
+啟動 `docker`
+
+```console
+sudo systemctl start docker
+```
+
 
 設定 `docker` 於系統啟動時自動執行
 
