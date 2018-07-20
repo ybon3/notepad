@@ -65,6 +65,13 @@ docker inspect --format='{{.Mounts}}' $(docker ps -q)
 ```
 
 
+### 查看一個 container 它拿到那一個IP地址
+
+```console
+sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
+```
+
+
 # 使用 private registry 來管理 image
 
 以下假設 private registry 的 host 為 `foo.bar.io`
