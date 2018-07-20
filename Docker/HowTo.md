@@ -38,6 +38,19 @@ docker rmi $(docker images -q)
 > `$(...)` 可以執行另一個指令，並將結果作為參數給主要指令使用
 
 
+### Remove <none> TAG images 
+
+```console
+docker rm $(docker ps -a -q)
+```
+
+```console
+docker rmi $(docker images | grep none | awk '{print $3;}')
+
+sudo docker rmi $(sudo docker images | grep none | awk '{print $3;}')
+```
+
+
 ### 查閱 container 運作的詳細設定值
 
 ```console
