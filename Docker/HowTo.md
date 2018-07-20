@@ -52,8 +52,55 @@ docker inspect --format='{{.Mounts}}' $(docker ps -q)
 ```
 
 
+# 使用 private registry 來管理 image
+
+以下假設 private registry 的 host 為 `foo.bar.io`
+
+
 ### Login to a private registry
 
 ```console
-docker login localhost:8080
+docker login foo.bar.io
 ```
+
+
+### 使用 `mvn dockerfile:build` 時 `pom.xml` 需設定為
+
+```xml
+...
+<plugin>
+	<groupId>com.spotify</groupId>
+	<artifactId>dockerfile-maven-plugin</artifactId>
+	<version>1.3.6</version>
+	<configuration>
+		<repository>foo.bar.io/${project.artifactId}</repository>
+		<buildArgs>
+			<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+		</buildArgs>
+	</configuration>
+</plugin>
+```
+
+
+### push image to private registry
+
+```console
+docker push foo.bar.io/wtf-ms
+```
+
+
+### pull image from private registry
+
+於 deploy 環境中先用前面的登入指定完成登入，然後進行 `pull`
+
+```console
+sudo docker pull foo.bar.io/wtf-ms
+```
+
+最後以該 image 跑 container
+
+```console
+sudo docker run --name wtf-ms -d -v ~/volumes/wtf/tmp:/tmp -p 1234:1234 foo.bar.io/wtf-ms
+```
+
+*如果有需要可以加上 tag*
