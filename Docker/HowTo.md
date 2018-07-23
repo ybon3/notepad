@@ -1,4 +1,5 @@
-### 變更 Docker Machine 的 remote registry
+變更 Docker Machine 的 remote registry
+======================================
 
 參照：https://stackoverflow.com/questions/26026931/setting-up-a-remote-private-docker-registry
 
@@ -60,8 +61,10 @@ docker inspect $(docker ps -q)
 docker inspect --format='{{.Mounts}}' $(docker ps -q)
 ```
 
+<br/><br/>
 
-# 使用 private registry 來管理 image
+使用 private registry 來管理 image
+=================================
 
 以下假設 private registry 的 host 為 `foo.bar.io`
 
@@ -113,3 +116,8 @@ sudo docker run --name wtf-ms -d -v ~/volumes/wtf/tmp:/tmp -p 1234:1234 foo.bar.
 ```
 
 *如果有需要可以加上 tag*
+
+
+其他參考資料：
+
+[Push your first image to a private Docker container registry using the Docker CLI](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-docker-cli)
