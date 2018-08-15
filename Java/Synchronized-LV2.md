@@ -9,19 +9,19 @@ Synchronized use object(this) as key
 
 ### Case 2: one instance on diff method
 
-全部都要等，雖然窗口有兩個，但只准一個窗口在單一時間做事。
+全部都要等，雖然窗口有兩個，但能做事的事務員只有一個。
 <br/><br/>
 
 
-### Case 3: two instance on same method
+### Case 3: two instance on same method (separate key)
 
 不用等，就像有兩個人在處理分別（或同性質）的窗口事務。
 <br/><br/>
 
 
-### Case 4: two instance on same method, use same key
+### Case 4: two instance on same method (use same key)
 
-要等，雖然事務員有多個，但只有一個服務窗口。
+要等待，雖然事務員有多個，但只有一個服務窗口。
 <br/><br/>
 
 
