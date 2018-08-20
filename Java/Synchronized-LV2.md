@@ -44,8 +44,8 @@ public class SyncTest_LV2 {
 	public static void main(String[] args) {
 //		case01(2);
 //		case02(2);
-//		case03(2);
-		case04(2);
+		case03(2);
+//		case04(2);
 	}
 
 	static void case01(int sec) {
@@ -85,17 +85,19 @@ public class SyncTest_LV2 {
 	static void case03(int sec) {
 		SyncTest_LV2 ins01 = new SyncTest_LV2();
 		SyncTest_LV2 ins02 = new SyncTest_LV2();
+		Object key1 = new Object();
+		Object key2 = new Object();
 
 		executor.execute(new Task("foo-ins01") {
 			@Override
 			public void exec() {
-				ins01.foo(sec);
+				ins01.execByKey(sec, key1);
 			}
 		});
 		executor.execute(new Task("foo-ins02") {
 			@Override
 			public void exec() {
-				ins02.foo(sec);
+				ins02.execByKey(sec, key2);
 			}
 		});
 	}
@@ -103,17 +105,18 @@ public class SyncTest_LV2 {
 	static void case04(int sec) {
 		SyncTest_LV2 ins01 = new SyncTest_LV2();
 		SyncTest_LV2 ins02 = new SyncTest_LV2();
+		Object key = new Object();
 
 		executor.execute(new Task("useSameKey-ins01") {
 			@Override
 			public void exec() {
-				ins01.useSameKey(sec);
+				ins01.execByKey(sec, key);
 			}
 		});
 		executor.execute(new Task("useSameKey-ins02") {
 			@Override
 			public void exec() {
-				ins02.useSameKey(sec);
+				ins02.execByKey(sec, key);
 			}
 		});
 	}
@@ -130,9 +133,9 @@ public class SyncTest_LV2 {
 		}
 	}
 
-	void useSameKey(int sec) {
-		synchronized (r) {
-			sleep("useSameKey", sec);
+	void execByKey(int sec, Object key) {
+		synchronized (key) {
+			sleep("execByKey", sec);
 		}
 	}
 
