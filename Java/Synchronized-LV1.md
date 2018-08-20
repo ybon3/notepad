@@ -1,7 +1,7 @@
 > # 常常忘記，所以好好地記錄一下
 <br/><br/>
 
-Synchronized at Method
+Synchronized on Method
 ----------------------
 
 ### Case 1: one static method
