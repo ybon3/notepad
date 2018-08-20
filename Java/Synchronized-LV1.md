@@ -1,8 +1,12 @@
 > # 常常忘記，所以好好地記錄一下
 <br/><br/>
 
+
+用多個 Thread 來同時 invoke synchronized method，並觀察執行狀況來做出結論
+
 Synchronized on Method
 ----------------------
+
 
 ### Case 1: one static method
 
