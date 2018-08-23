@@ -11,3 +11,10 @@ $ touch foo/bar
 $ docker-machine ssh dev ls foo
 bar
 ```
+
+### 確認虛擬機器的 ip
+
+```console
+docker-machine ip
+```
+
