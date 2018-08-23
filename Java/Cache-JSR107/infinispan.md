@@ -37,7 +37,8 @@
 - ### ISPN000436: Cache 'CACHE_NAME' has been requested, but no cache configuration exists with that name and no default cache has been set for this container
 
 invoke `getCache()` 之前必須先確認是否存在（透過 `cacheExists()`）。
-然而，在 Multi-thread 的情況下，若沒有用 synchronized lock 住，這樣的確認方式也沒有意義。  
+然而，在 Multi-thread 的情況下，若沒有用 synchronized lock 住，這樣的確認方式也沒有意義，
+因為有可能在確認之後又被其他 thread invoke `removeCache()`。  
 <br/><br/>
 
 
@@ -48,8 +49,9 @@ invoke `getCache()` 之前必須先確認是否存在（透過 `cacheExists()`�
 
 ```java
 public void clearCache() {
-if (cacheManager.cacheExists(CACHE_NAME)) {
-	cacheManager.getCache(CACHE_NAME).clear();
+	if (cacheManager.cacheExists(CACHE_NAME)) {
+		cacheManager.getCache(CACHE_NAME).clear();
+	}
 }
 ```
 
@@ -57,7 +59,7 @@ if (cacheManager.cacheExists(CACHE_NAME)) {
 結論
 ====
 
-1. 如果要使用 `removeCache()` 請撤底考慮到所有的 Thread-Safe 問題；
+1. 如果要使用 `removeCache()` 必須徹底考慮到所有的 Thread-Safe 問題。
 
 2. 當連續執行下列程式碼時本身存在著：
 
