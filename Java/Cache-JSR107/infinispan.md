@@ -47,6 +47,7 @@ invoke `getCache()` 之前必須先確認是否存在（透過 `cacheExists()`�
 應避免使用 `removeCache()`；做為替代應使用：
 
 ```java
+public void clearCache() {
 if (cacheManager.cacheExists(CACHE_NAME)) {
 	cacheManager.getCache(CACHE_NAME).clear();
 }
