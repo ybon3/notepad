@@ -9,7 +9,9 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
 public class Executor implements Watcher, Runnable, DataMonitor.DataMonitorListener {
-	private static String filename = "D:\\testZookeeper2.txt";
+	private static String filename = "D:\\testZookeeper.txt";
+	private static String HOST = "localhost:2181";
+	private static String NODE = "/";
 
 	String znode;
 
@@ -17,16 +19,15 @@ public class Executor implements Watcher, Runnable, DataMonitor.DataMonitorListe
 
 	ZooKeeper zk;
 
-	Process child;
-
 	public Executor(String hostPort, String znode) throws KeeperException, IOException {
+		this.znode = znode;
 		zk = new ZooKeeper(hostPort, 3000, this);
 		dm = new DataMonitor(zk, znode, null, this);
 	}
 
 	public static void main(String[] args) {
 		try {
-			new Executor(Context.HOST, Context.ZNODE).run();
+			new Executor(HOST, NODE).run();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -46,6 +47,7 @@ public class Executor implements Watcher, Runnable, DataMonitor.DataMonitorListe
 	public void run() {
 		try {
 			synchronized (this) {
+				System.out.println("NODE: [" + znode + "] | " + filename);
 				while (!dm.dead) {
 					wait();
 					System.out.println("awake...");
@@ -57,6 +59,7 @@ public class Executor implements Watcher, Runnable, DataMonitor.DataMonitorListe
 
 	@Override
 	public void closing(Code rc) {
+		System.out.println("closing() " + rc);
 		synchronized (this) {
 			notifyAll();
 		}
@@ -64,26 +67,7 @@ public class Executor implements Watcher, Runnable, DataMonitor.DataMonitorListe
 
 	@Override
 	public void exists(byte[] data) {
-		if (data == null) {
-			if (child != null) {
-				System.out.println("Killing process");
-				child.destroy();
-				try {
-					child.waitFor();
-				} catch (InterruptedException e) {
-				}
-			}
-			child = null;
-		} else {
-			if (child != null) {
-				System.out.println("Stopping child");
-				child.destroy();
-				try {
-					child.waitFor();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
+		if (data != null) {
 			try {
 				FileOutputStream fos = new FileOutputStream(filename);
 				fos.write(data);

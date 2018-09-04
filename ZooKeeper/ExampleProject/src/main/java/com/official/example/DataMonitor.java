@@ -1,4 +1,4 @@
-package com.nkg.zookeeper;
+package com.official.example;
 
 /**
  * A simple class that monitors the data and existence of a ZooKeeper
@@ -6,12 +6,12 @@ package com.nkg.zookeeper;
  */
 import java.util.Arrays;
 
-import org.apache.zookeeper.AsyncCallback.StatCallback;
 import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.KeeperException.Code;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.AsyncCallback.StatCallback;
+import org.apache.zookeeper.KeeperException.Code;
 import org.apache.zookeeper.data.Stat;
 
 public class DataMonitor implements Watcher, StatCallback {
@@ -50,13 +50,15 @@ public class DataMonitor implements Watcher, StatCallback {
 
 		/**
 		 * The ZooKeeper session is no longer valid.
+		 *
+		 * @param rc
+		 *				the ZooKeeper reason code
 		 */
-		void closing(Code rc);
+		void closing(int rc);
 	}
 
 	@Override
 	public void process(WatchedEvent event) {
-		System.out.println("process " + event.getType() + " | " + event.getState());
 		String path = event.getPath();
 		if (event.getType() == Event.EventType.None) {
 			// We are are being told that the state of the
@@ -71,9 +73,7 @@ public class DataMonitor implements Watcher, StatCallback {
 			case Expired:
 				// It's all over
 				dead = true;
-				listener.closing(Code.SESSIONEXPIRED);
-				break;
-			default:
+				listener.closing(KeeperException.Code.SessionExpired);
 				break;
 			}
 		} else {
@@ -89,20 +89,18 @@ public class DataMonitor implements Watcher, StatCallback {
 
 	@Override
 	public void processResult(int rc, String path, Object ctx, Stat stat) {
-		System.out.println("processResult " + Code.get(rc));
 		boolean exists;
-		Code code = Code.get(rc);
-		switch (code) {
-		case OK:
+		switch (rc) {
+		case Code.Ok:
 			exists = true;
 			break;
-		case NONODE:
+		case Code.NoNode:
 			exists = false;
 			break;
-		case SESSIONEXPIRED:
-		case NOAUTH:
+		case Code.SessionExpired:
+		case Code.NoAuth:
 			dead = true;
-			listener.closing(code);
+			listener.closing(rc);
 			return;
 		default:
 			// Retry errors
