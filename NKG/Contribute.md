@@ -1,0 +1,3 @@
+- Docker 環境佈署、建置等研究
+- 改善產品列表頁面的 Load 效率
+- ZooKeeper Event-Driven 環境建置
