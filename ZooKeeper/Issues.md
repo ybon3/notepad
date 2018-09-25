@@ -74,4 +74,14 @@ KeeperState
 
 - ### AuthFailed / ConnectedReadOnly / SaslAuthenticated
 	尚未使用到
+
+
+Docker run with `-v` option
+---------------------------
+
+目前不確定為什麼會有權限問題：
+
+```
+/docker-entrypoint.sh: line 15: /conf/zoo.cfg: Permission denied
+```
 	
