@@ -15,7 +15,7 @@ Micro-Service 壓測初步檢討
 <br/><br/>
 
 1. Order Filter API （region=TWN、merchant_id=tester）：
-	- 從實測結果來看，失敗率接近五成
+	- 從實測結果來看，失敗率超過 4 成(424/1000, taken 744.481 sec.)
 	- 此 API 的行為主要分三個階段：
 		a. 資料庫查詢
 		b. 完善查詢結果所需的資訊
@@ -23,11 +23,12 @@ Micro-Service 壓測初步檢討
 		
 	- b 項由於沒有其他的子表需要再帶出，所以可以無視
 	- a 項隨著同時在線使用者多寡，單筆的回傳效率會有明顯差異
-	- c 項目前測試沒有效能瓶頸，大約都在 100 ms 內（-c 270 -n 10000 taken ）
+	- c 項目前測試沒有效能瓶頸，大約都在 100 ms 內（-c 270 -n 10000 taken 979.586 sec.）
 	- 已跟 Eric 確認過，此測試區的 DB 是最低等級
 	- 結論：
 		效率會因為單一時間內的使用者多寡，直接影響到資料庫存取的反應效率，
 		本 API 的查詢單次執行時平均約 1.5 秒，但依照資料庫當下的負載程度，
 		可能會需要超過 40 秒，此情況會導致單一的 request 佔用 DB connection 時間過長，
 		進而使其他 request waiting connection timeout，最終產生 request failed。
+		與 DB connection 數量應該沒有關係，單純是資料庫處理速度追不上使用者的使用量。
 	
