@@ -56,6 +56,7 @@ Run ZooKeeper on Windows
 1. [到此下載](http://apache.stu.edu.tw/zookeeper/)
 2. 解壓為目錄後，於 `X:\zookeeper-3.4.13\conf\` 中，參考 `zoo_sample.cfg` 來建立 `zoo.cfg`
 3. 執行 `X:\zookeeper-3.4.13\bin\zkServer.cmd`
+4. 執行 `X:\zookeeper-3.4.13\bin\zkCli –server 127.0.0.1:2181` 可以連上 zk server，打 `help` 可以看指令
 
 
 關於實作 Event-Driven 的心得
