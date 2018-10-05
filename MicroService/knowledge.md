@@ -7,3 +7,6 @@ https://www.innoq.com/en/blog/why-restful-communication-between-microservices-ca
 
 ### Pattern: Shared database
 https://microservices.io/patterns/data/shared-database.html
+
+### Pattern: Microservice Architecture
+https://microservices.io/patterns/microservices.html
