@@ -4,3 +4,6 @@ https://www.innoq.com/en/blog/why-restful-communication-between-microservices-ca
 
 ### 微服務架構中的通訊
 https://www.innoq.com/en/blog/why-restful-communication-between-microservices-can-be-perfectly-fine/
+
+### Pattern: Shared database
+https://microservices.io/patterns/data/shared-database.html
