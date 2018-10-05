@@ -85,3 +85,10 @@ Docker run with `-v` option
 /docker-entrypoint.sh: line 15: /conf/zoo.cfg: Permission denied
 ```
 	
+
+已確認的問題
+-----------
+
+使用 Windows run 的 zookeeper server 如果在停止之後，刪除其 `dataDir` 下的檔案就會發生本文提及的主要問題，
+Docker 由於 remove container 再執行 run 等於也是重新 create 整個環境，意味著 `dataDir` 也會不存在，
+所以大致上可以視為是一樣的問題。
