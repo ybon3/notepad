@@ -21,7 +21,7 @@ sudo docker run --name zookeeper2 -d -e "ZOO_SERVER_ID=2" -e "ZOO_SERVERS=172.17
 ```
 
 
-# # 觀測 zookeeper 的狀態
+## 觀測 zookeeper 的狀態
 
 ```console
 echo stat | nc 172.17.0.1 8080
