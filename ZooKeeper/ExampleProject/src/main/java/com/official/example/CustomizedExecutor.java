@@ -1,36 +1,36 @@
-package com.nkg.zookeeper;
+package com.official.example;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.KeeperException.Code;
-
-import com.common.Context;
-
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
-public class Executor implements Watcher, Runnable, DataMonitor.DataMonitorListener {
-	private static String filename = "D:\\testZookeeper.txt";
-	private static String HOST = Context.HOST;
-	private static String NODE = Context.NODE;
+import com.common.Context;
 
+public class CustomizedExecutor
+	implements Watcher, Runnable, DataMonitor.DataMonitorListener
+{
 	String znode;
 
 	DataMonitor dm;
 
 	ZooKeeper zk;
 
-	public Executor(String hostPort, String znode) throws KeeperException, IOException {
-		this.znode = znode;
+	public CustomizedExecutor(String hostPort, String znode) throws KeeperException, IOException {
 		zk = new ZooKeeper(hostPort, 3000, this);
 		dm = new DataMonitor(zk, znode, null, this);
 	}
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
-			new Executor(HOST, NODE).run();
+			new CustomizedExecutor(Context.HOST, Context.NODE).run();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,10 +50,8 @@ public class Executor implements Watcher, Runnable, DataMonitor.DataMonitorListe
 	public void run() {
 		try {
 			synchronized (this) {
-				System.out.println("NODE: [" + znode + "] | " + filename);
 				while (!dm.dead) {
 					wait();
-					System.out.println("awake...");
 				}
 			}
 		} catch (InterruptedException e) {
@@ -61,25 +59,44 @@ public class Executor implements Watcher, Runnable, DataMonitor.DataMonitorListe
 	}
 
 	@Override
-	public void closing(Code rc) {
-		System.out.println("closing() " + rc);
+	public void closing(int rc) {
 		synchronized (this) {
 			notifyAll();
 		}
 	}
 
-	@Override
-	public void exists(byte[] data) {
-		if (data != null) {
+	static class StreamWriter extends Thread {
+		OutputStream os;
+
+		InputStream is;
+
+		StreamWriter(InputStream is, OutputStream os) {
+			this.is = is;
+			this.os = os;
+			start();
+		}
+
+		@Override
+		public void run() {
+			byte b[] = new byte[80];
+			int rc;
 			try {
-				FileOutputStream fos = new FileOutputStream(filename);
-				fos.write(data);
-				fos.close();
+				while ((rc = is.read(b)) > 0) {
+					os.write(b, 0, rc);
+				}
 			} catch (IOException e) {
-				e.printStackTrace();
 			}
 
-			System.out.println("we can react something here ...");
+		}
+	}
+
+	@Override
+	public void exists(byte[] data) {
+		try {
+			System.out.println("=========");
+			System.out.write(data);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -5,19 +5,20 @@ import java.io.IOException;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
 
+import com.common.Context;
 import com.google.gson.Gson;
 import com.newKinPo.object.ObjCacheSync;
 import com.nkg.zookeeper.SimpleWatcher;
 
 public class NkgNodeDataChanger {
-	private static String HOST = "xxxx:8080";
-	private static String NODE = "/ESHOP/STAGE/XYZ/CACHE";
+	private static String HOST = Context.HOST;
+	private static String NODE = Context.NODE;
 
 	public static void main(String[] args)
 			throws IOException, KeeperException, InterruptedException {
 		ObjCacheSync cacheData = new ObjCacheSync();
-		cacheData.countryId = 1;
-		cacheData.cacheArgs = new String[]{"CATEGORYSALEITEM"};
+		cacheData.countryId = 2;
+		cacheData.cacheArgs = new String[]{"PRODUCTPAGE"};
 		cacheData.dateTime = System.currentTimeMillis();
 		String changeStringTo = new Gson().toJson(cacheData);
 

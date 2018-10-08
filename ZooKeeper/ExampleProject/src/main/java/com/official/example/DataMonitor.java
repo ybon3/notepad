@@ -59,6 +59,7 @@ public class DataMonitor implements Watcher, StatCallback {
 
 	@Override
 	public void process(WatchedEvent event) {
+		System.out.println("process() " + event.getType() + " | " + event.getState());
 		String path = event.getPath();
 		if (event.getType() == Event.EventType.None) {
 			// We are are being told that the state of the

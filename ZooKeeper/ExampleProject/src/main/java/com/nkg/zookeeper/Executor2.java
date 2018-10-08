@@ -7,13 +7,15 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.KeeperException.Code;
 
+import com.common.Context;
+
 /**
  * Just Watch event
  */
 public class Executor2 implements Watcher, Runnable {
 	private static String filename = "D:\\testZookeeper.txt";
-	private static String HOST = "localhost:2181";
-	private static String NODE = "/";
+	private static String HOST = Context.HOST;
+	private static String NODE = Context.NODE;
 
 	String znode;
 

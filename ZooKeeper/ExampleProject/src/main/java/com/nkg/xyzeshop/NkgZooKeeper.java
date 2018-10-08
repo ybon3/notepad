@@ -20,7 +20,6 @@ import com.newKinPo.util.ZooKeeperUtil;
  * {@link ZooKeeper wrapper}
  * @author Dante
  */
-@Deprecated
 public class NkgZooKeeper implements Watcher, StatCallback {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private ZooKeeper zk;

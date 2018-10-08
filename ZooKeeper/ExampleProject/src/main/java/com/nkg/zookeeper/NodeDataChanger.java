@@ -5,9 +5,11 @@ import java.io.IOException;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
 
+import com.common.Context;
+
 public class NodeDataChanger {
-	private static String HOST = "localhost:2181";
-	private static String NODE = "/";
+	private static String HOST = Context.HOST;
+	private static String NODE = Context.NODE;
 	private static String changeStringTo = "1234567890";
 
 	public static void main(String[] args)

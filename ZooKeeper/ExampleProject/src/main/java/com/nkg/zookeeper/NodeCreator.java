@@ -8,8 +8,10 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 
+import com.common.Context;
+
 public class NodeCreator implements Watcher {
-	private static String HOST = "localhost:2181";
+	private static String HOST = Context.HOST;
 	private static String NEW_NODE = "/HONE_TEST/YYYY";
 
 	private ZooKeeper zk;
