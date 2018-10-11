@@ -13,6 +13,12 @@ sudo docker run -it --rm --link zookeeper:zookeeper zookeeper zkCli.sh -server z
 ```
 
 
+## 用 putty 登入 container 
+```console
+sudo docker exec -it zookeeper /bin/bash
+```
+
+
 ## 開啟另一個 ZK 並串接另一個
 
 ```console
