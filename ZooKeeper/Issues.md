@@ -1,18 +1,19 @@
 問題列表
-========
+=======
 
 https://wiki.apache.org/hadoop/ZooKeeper/FAQ
 
 
-## 前提假設：以 Docker 做為 ZooKeeper 執行環境
+以 Docker 做為 ZooKeeper 執行環境時的相關問題
+-------------------------------------------
 
 
 - ## 伺服器斷線
 
 docker container rm 與 stop -> start （or restart）是不同的情況
 
-	- `docker container rm` 再進行 `docker run` 等同重新安裝，會對 client socker 造成 `SESSIONEXPIRED`
-	- `docker container restart` 則會讓 `ClientCnxn` 自行完成重建 connection
+  - `docker container rm` 再進行 `docker run` 等同重新安裝，會對 client socker 造成 `SESSIONEXPIRED`
+  - `docker container restart` 則會讓 `ClientCnxn` 自行完成重建 connection
 
 	
 下列為 `ClientCnxn` 噴的 log，如果無法與 ZooKeeper 建立 connection 會一直嘗試
@@ -54,26 +55,12 @@ INFO  [org.apache.zookeeper.ClientCnxn] (ServerService Thread Pool -- 59-SendThr
 ```
 
 
-KeeperState
------------
+- ## 已確認的問題
 
-
-參閱：https://zookeeper.apache.org/doc/r3.4.13/api/index.html
-
-- ### SyncConnected: The client is in the connected state 
-	最正常的連接狀態
-
-- ### Expired: The serving cluster has expired this session
-	ClientCnxn 不會嘗試重新連接，會關閉 socket，**ZooKeeper 的 instance 也不可再使用**
-	
-	要製造這個現象可以把網路斷開一段時間（看 server timeout 的設定）再恢復連線 
-	
-- ### Disconnected: The client is in the disconnected state
-	ClientCnxn 會一直嘗試重新連接，而且當這個狀態發生時，
-	`ZooKeeper.getState().isConnected()` 還不見得會變成 `false`
-
-- ### AuthFailed / ConnectedReadOnly / SaslAuthenticated
-	尚未使用到
+使用 Windows run 的 zookeeper server 如果在停止之後，刪除其 `dataDir` 下的檔案就會發生本文提及的主要問題，
+Docker 由於 remove container 再執行 run 等於也是重新 create 整個環境，意味著 `dataDir` 也會不存在，
+所以大致上可以視為是一樣的問題。
+<br/><br/>
 
 
 Docker run with `-v` option
@@ -81,14 +68,9 @@ Docker run with `-v` option
 
 目前不確定為什麼會有權限問題：
 
-```
+
+```console
+$ sudo docker run --name zookeeper -v ~/volumes/zookeeper-2181/conf:/conf -p 2181:2181 zookeeper:3.4.13
 /docker-entrypoint.sh: line 15: /conf/zoo.cfg: Permission denied
 ```
-	
 
-已確認的問題
------------
-
-使用 Windows run 的 zookeeper server 如果在停止之後，刪除其 `dataDir` 下的檔案就會發生本文提及的主要問題，
-Docker 由於 remove container 再執行 run 等於也是重新 create 整個環境，意味著 `dataDir` 也會不存在，
-所以大致上可以視為是一樣的問題。
