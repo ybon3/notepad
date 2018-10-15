@@ -12,7 +12,7 @@ https://wiki.apache.org/hadoop/ZooKeeper/FAQ
 
 docker container rm 與 stop -> start （or restart）是不同的情況
 
-  - `docker container rm` 再進行 `docker run` 等同重新安裝，會對 client socker 造成 `SESSIONEXPIRED`
+  - `docker container rm` 再進行 `docker run` 等同重新安裝 ~~，會對 client socker 造成 `SESSIONEXPIRED`~~
   - `docker container restart` 則會讓 `ClientCnxn` 自行完成重建 connection
 
 	
