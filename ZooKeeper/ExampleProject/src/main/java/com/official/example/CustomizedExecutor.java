@@ -12,17 +12,17 @@ import org.apache.zookeeper.ZooKeeper;
 import com.common.Context;
 
 public class CustomizedExecutor
-	implements Watcher, Runnable, DataMonitor.DataMonitorListener
+	implements Watcher, Runnable, CustomizedDataMonitor.DataMonitorListener
 {
 	String znode;
 
-	DataMonitor dm;
+	CustomizedDataMonitor dm;
 
 	ZooKeeper zk;
 
 	public CustomizedExecutor(String hostPort, String znode) throws KeeperException, IOException {
 		zk = new ZooKeeper(hostPort, 3000, this);
-		dm = new DataMonitor(zk, znode, null, this);
+		dm = new CustomizedDataMonitor(zk, znode, null, this);
 	}
 
 	/**
@@ -95,6 +95,7 @@ public class CustomizedExecutor
 		try {
 			System.out.println("=========");
 			System.out.write(data);
+			System.out.println();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

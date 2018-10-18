@@ -9,7 +9,7 @@ import com.common.Context;
 
 public class ShowAllNode {
 	private static String HOST = Context.HOST;
-	private static String NODE = Context.NODE;
+	private static String NODE = "/"; //Context.NODE;
 
 	public static void main(String[] args) throws IOException {
 		ZooKeeper zk = new ZooKeeper(HOST, 3000, new SimpleWatcher());
