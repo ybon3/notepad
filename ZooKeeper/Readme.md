@@ -77,4 +77,4 @@ Run ZooKeeper on Windows
 5. `Watcher` 關注的是 Server 的連線狀態，我們在 `exists()` 能夠使用，從設計的角度來看似乎是設計者讓它「順便可以這樣」
 6. Server 斷線（Disconnected）會**一直**自動嘗試重新連線
 
-## Solution: 使用 [Curator](https://curator.apache.org/)
+不幸地，`ZooKeeper` Client 無法保證每一次的 event 都能讓 client 的 `Watcher` 收到
