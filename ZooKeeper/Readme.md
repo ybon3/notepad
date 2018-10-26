@@ -20,6 +20,8 @@
 
 - [UsefulTools](https://cwiki.apache.org/confluence/display/ZOOKEEPER/UsefulTools)
 
+- [Adding 2 nodes to an existing 3-node ZooKeeper ensemble without losing the Quorum](https://gist.github.com/miketheman/6057930)
+
 - - - - - -
 
 綜合所有 Survey，完成本篇範例，主要提供：
