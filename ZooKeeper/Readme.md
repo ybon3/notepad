@@ -22,6 +22,8 @@
 
 - [Adding 2 nodes to an existing 3-node ZooKeeper ensemble without losing the Quorum](https://gist.github.com/miketheman/6057930)
 
+- [ZooKeeper介绍及典型使用场景](https://blog.csdn.net/liuxinghao/article/details/42747625)
+
 - - - - - -
 
 綜合所有 Survey，完成本篇範例，主要提供：
