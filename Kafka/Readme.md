@@ -9,3 +9,7 @@
 - [API Document](https://kafka.apache.org/20/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html)
 
 - [Apache kafka 工作原理介绍](https://www.ibm.com/developerworks/cn/opensource/os-cn-kafka/index.html)
+
+- [Kafka設計解析之Kafka背景及架構介紹](https://read01.com/aOmoA.html)
+
+- 
