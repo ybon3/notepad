@@ -6,4 +6,8 @@
 - Kafka 環境建置
   - Steam 需求實作
 - DevOps 導入協助（CI-CD 部分）
-- Microservice 結構化設計
+- Microservice
+  - 結構化設計
+  - WebService 轉移
+  - 壓測驗證（並明確指出原本菲律賓壓測方式錯誤的原由）
+ 
