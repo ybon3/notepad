@@ -20,6 +20,10 @@
 
 - [UsefulTools](https://cwiki.apache.org/confluence/display/ZOOKEEPER/UsefulTools)
 
+- [Adding 2 nodes to an existing 3-node ZooKeeper ensemble without losing the Quorum](https://gist.github.com/miketheman/6057930)
+
+- [ZooKeeper介绍及典型使用场景](https://blog.csdn.net/liuxinghao/article/details/42747625)
+
 - - - - - -
 
 綜合所有 Survey，完成本篇範例，主要提供：
@@ -75,3 +79,4 @@ Run ZooKeeper on Windows
 5. `Watcher` 關注的是 Server 的連線狀態，我們在 `exists()` 能夠使用，從設計的角度來看似乎是設計者讓它「順便可以這樣」
 6. Server 斷線（Disconnected）會**一直**自動嘗試重新連線
 
+不幸地，`ZooKeeper` Client 無法保證每一次的 event 都能讓 client 的 `Watcher` 收到

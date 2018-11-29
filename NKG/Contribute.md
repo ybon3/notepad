@@ -1,3 +1,13 @@
 - Docker 環境佈署、建置等研究
-- 改善產品列表頁面的 Load 效率
+  - Docker-compose 導入
+- 改善產品列表頁面的 Load 效率（30秒 -> 6秒）
 - ZooKeeper Event-Driven 環境建置
+  - 分散式 cache 管理，XYZ、HiMirror 新版的 cache 功能
+- Kafka 環境建置
+  - Steam 需求實作
+- DevOps 導入協助（CI-CD 部分）
+- Microservice
+  - 結構化設計
+  - WebService 轉移
+  - 壓測驗證（並明確指出原本菲律賓壓測方式錯誤的原由）
+ 
