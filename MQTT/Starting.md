@@ -1,3 +1,9 @@
+Message Queueing Telemetry Transport
+====================================
+
+是一種通訊協定，由於訊息內容很精簡，非常適合用於處理器資源及網路頻寬有限的物聯網裝置
+
+
 ## MQTT的官網
 http://mqtt.org/
 
