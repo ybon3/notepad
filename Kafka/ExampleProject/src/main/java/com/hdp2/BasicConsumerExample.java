@@ -11,6 +11,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
+import org.apache.kafka.common.header.Header;
+import org.apache.kafka.common.header.Headers;
 
 import com.common.Context;
 
@@ -38,9 +40,17 @@ public class BasicConsumerExample {
 			for (ConsumerRecord<byte[], byte[]> record : records) {
 				System.out.printf("[%s]{%s} offset:%d, [K]%s, [V]%s\n",
 						record.topic(), record.partition(), record.offset(), record.key(), record.value());
+
+				showHeaders(record.headers());
 			}
 
 			consumer.commitSync();
+		}
+	}
+
+	private static void showHeaders(Headers headers) {
+		for (Header header : headers) {
+			System.out.println(header.key() + " : " + new String(header.value()));
 		}
 	}
 

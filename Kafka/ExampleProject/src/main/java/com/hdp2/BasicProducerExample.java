@@ -32,13 +32,17 @@ public class BasicProducerExample {
 		Random rnd = new Random();
 		for (long i = 0; i < 5 ; i++) {
 			//with key
-//			ProducerRecord<String, String> data = new ProducerRecord<>(
-//					Context.TOPIC, "key-" + i, "message-222" + i );
+			ProducerRecord<String, String> data = new ProducerRecord<>(
+					Context.TOPIC, "key-" + i, "message-222" + i );
+			data.headers().add("with_key_aaa", "qwerasdfzxc1234".getBytes());
+			data.headers().add("with_key_aaa", "tyutyuyt6556765765".getBytes());
+			producer.send(data, callback);
 
 			//without key
 			ProducerRecord<String, String> data = new ProducerRecord<>(
 					Context.TOPIC, "message-"+i );
-
+			data.headers().add("without_key_bbb", "qwerasdfzxc1234".getBytes());
+			data.headers().add("without_key_bbb", "tyutyuyt6556765765".getBytes());
 			producer.send(data, callback);
 		}
 
