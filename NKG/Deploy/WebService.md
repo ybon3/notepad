@@ -7,9 +7,18 @@ XYZ
 2. 觸發 Jenkin CI/CD (by push branch)
 3. 確認更新完畢
 4. 通報相關人員切換分流
-5. 觸發 Jenkin CI/CD (by manual)
-6. 確認更新完畢
-7. 請相關人員恢復分流
+5. 變更 Jenkin deploy 對象設定
+6. 觸發 Jenkin CI/CD (by manual)
+7. 確認更新完畢
+8. 請相關人員恢復分流
+
+
+確認辦法
+=======
+
+1. WinSCP 確認 war 檔版本(日期)
+2. call /XYZEShop/HELLO 
+
 
 
 錯誤處理
