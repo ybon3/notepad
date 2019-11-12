@@ -8,7 +8,7 @@
 
 [Hello Spring Security with Boot](https://docs.spring.io/spring-security/site/docs/current/guides/html5/helloworld-boot.html)
 
-[【Spring Boot實戰】Spring常用配置](https://dotblogs.com.tw/una/2018/03/20/180007)
+[【Spring Boot實戰】Spring常用配置](https://dotblogs.com.tw/una/2018/03/20/180007)
 
 
 - - - -
