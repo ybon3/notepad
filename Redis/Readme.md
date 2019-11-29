@@ -26,6 +26,8 @@
 
 - [serialization 的問題](https://stackoverflow.com/questions/28705921/ignore-transient-fields-of-an-entity-automatically-during-json-serialization)
 
+- [Redis的數據保持時間問題，不設置expire是否永久有效？](https://kknews.cc/zh-tw/code/b4q5vkm.html)
+
 
 Lettuce v.s Jedis
 =================
