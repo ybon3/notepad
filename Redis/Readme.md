@@ -126,3 +126,30 @@ public class RedisConfig {
 ```
 
 我們也可以在要轉換的 class 中對特定的 method 加上 `@JsonIgnore` 來避免 serialization
+
+
+五大数据类型介绍
+================
+
+redis中的数据都是以 key/value 的形式存储的，**五大数据类型主要是指 value 的数据类型**，包含如下五种：
+
+- STRING
+
+  STRING是redis中最基本的数据类型，redis中的STRING类型是二进制安全的，即它可以包含任何数据，比如一个序列化的对象甚至一个jpg图片，要注意的是redis中的字符串大小上限是512M。
+
+- LIST
+
+  LIST是一个简单的字符串列表，按照插入顺序进行排序，我们可以从LIST的头部(LEFT)或者尾部(RIGHT)插入一个元素，也可以从LIST的头部(LEFT)或者尾部(RIGHT)弹出一个元素。
+
+- HASH
+
+  HASH类似于Java中的Map，是一个键值对集合，在redis中可以用来存储对象。
+
+- SET
+
+  SET是STRING类型的无序集合，不同于LIST，SET中的元素不可以重复。
+
+- ZSET
+
+  ZSET和SET一样，也是STRING类型的元素的集合，不同的是ZSET中的每个元素都会关联一个double类型的分数，ZSET中的成员都是唯一的，但是所关联的分数可以重复。
+
