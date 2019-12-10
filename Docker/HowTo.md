@@ -121,3 +121,24 @@ sudo docker run --name wtf-ms -d -v ~/volumes/wtf/tmp:/tmp -p 1234:1234 foo.bar.
 ### 其他參考資料：
 
 [Push your first image to a private Docker container registry using the Docker CLI](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-docker-cli)
+
+
+SSH into a Container
+====================
+
+```bash
+docker exec -it <container name> /bin/bash
+```
+
+
+### SSH into alpine os:
+
+```bash
+docker exec -it eshop-redis /bin/sh
+```
+
+
+Refers: 
+
+[SSH into a Container](https://phase2.github.io/devtools/common-tasks/ssh-into-a-container/)
+[Getting Started with Alpine](http://containertutorials.com/alpine/get_started.html)
