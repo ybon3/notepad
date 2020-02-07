@@ -1,4 +1,4 @@
-package com.nkg.crypto;
+package crypto;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
