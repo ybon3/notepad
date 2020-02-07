@@ -16,3 +16,8 @@
 - Java8-77
 
 詳細的測試程式可以參考 `AesTest.java`、`AesTest2.java`
+  
+  
+參考連結：
+
+- https://stackoverflow.com/questions/24129441/cipher-getmaxallowedkeylengthaes-returns-128-what-does-that-mean-if-i-want
