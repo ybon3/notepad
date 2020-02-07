@@ -20,4 +20,4 @@
   
 參考連結：
 
-<a href="https://stackoverflow.com/questions/24129441/cipher-getmaxallowedkeylengthaes-returns-128-what-does-that-mean-if-i-want" target="_blank">Cipher.getMaxAllowedKeyLength(“AES”) returns 128, what does that mean if I want to do AES256</a>
+- https://stackoverflow.com/questions/24129441/cipher-getmaxallowedkeylengthaes-returns-128-what-does-that-mean-if-i-want
