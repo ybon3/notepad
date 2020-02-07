@@ -1,4 +1,4 @@
-package com.nkg.crypto;
+package crypto;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
