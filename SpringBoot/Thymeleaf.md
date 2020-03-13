@@ -17,10 +17,10 @@
 ### Thymeleaf 提供的全域性物件
 
 - [dates](https://frontbackend.com/thymeleaf/thymeleaf-utility-methods-for-dates)
-- [calendars]()
+- [calendars](https://frontbackend.com/thymeleaf/thymeleaf-utility-methods-for-calendar)
 - [numbers](https://frontbackend.com/thymeleaf/thymeleaf-utility-methods-for-numbers)
 - [strings](https://frontbackend.com/thymeleaf/thymeleaf-utility-methods-for-strings)
-- [bools]()
+- [bools](https://frontbackend.com/thymeleaf/thymeleaf-utility-methods-for-booleans)
 - [arrays](https://frontbackend.com/thymeleaf/thymeleaf-utility-methods-for-arrays)
 - [lists](https://frontbackend.com/thymeleaf/thymeleaf-utility-methods-for-lists)
 - [sets](https://frontbackend.com/thymeleaf/thymeleaf-utility-methods-for-sets)
