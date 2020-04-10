@@ -1,9 +1,18 @@
 RSA 非對稱加密算法
-=================
+==================
+
 
 
 MD5 訊息摘要演算法
-=================
+==================
+
+https://zh.wikipedia.org/wiki/MD5#%E7%AE%97%E6%B3%95
+
+**MD5 = Message-Digest Algorithm**
+
+已被證實存在弱點（1996）
+
+輸出範例（128 bits = 16 Bytes = 32 Hex char）：`35454B055CC325EA1AF2126E27707052`
 
 
 SHA 家族
@@ -11,7 +20,7 @@ SHA 家族
 
 https://zh.wikipedia.org/wiki/SHA%E5%AE%B6%E6%97%8F
 
-SHA = Secure Hash Algorithm
+**SHA = Secure Hash Algorithm**
 
 - SHA-0(1993)：SHA-1前身  
   
