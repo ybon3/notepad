@@ -15,4 +15,5 @@ Reference from [HERE](http://joelabrahamsson.com/a-simple-example-of-the-openclo
 另外找到不錯的中文解釋：
 
 - [物件導向設計原則：開放封閉原則，定義、解析與實踐](https://ithelp.ithome.com.tw/articles/10229362?sc=rss.qu)
+- [開放封閉原則 Open-Closed Principle (OCP)](https://medium.com/@f40507777/%E9%96%8B%E6%94%BE%E5%B0%81%E9%96%89%E5%8E%9F%E5%89%87-open-closed-principle-31d61f9d37a5)
 
