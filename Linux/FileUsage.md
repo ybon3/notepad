@@ -16,3 +16,9 @@ reference: https://blog.xuite.net/cadmus.lin/yo/39567921-%E3%80%90%E7%B3%BB%E3%8
 ```linux
 du -sh ./apigateway/ ./order/
 ```
+
+範例：查詢指定路徑之下所有資料夾的總佔用空間
+
+```linux
+du -sh ./volumes/*
+```
