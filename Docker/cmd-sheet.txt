@@ -1,0 +1,82 @@
+
+
+# install & build images
+mvn clean install
+mvn clean install dockerfile:build -Ddocker.image.tag=himirror-stage
+
+# push image
+docker push nkgcontainerregistryeastasia.azurecr.io/promotion-ms:himirror-stage
+
+# pull image
+sudo docker pull nkgcontainerregistryeastasia.azurecr.io/promotion-ms:himirror-stage
+
+# run image
+sudo docker run --name checkout-ms-2b -d -v ~/volumes/checkout-2b/tmp:/tmp -p 8089:8089 nkgcontainerregistryeastasia.azurecr.io/checkout-ms-2b
+
+# Azure CR Testing (ACR)
+docker run --name catalog-ms -d -p 8092:8092 nkgcontainerregistryeastasia.azurecr.io/catalog-ms:test2
+
+# manual docker build
+docker build --build-arg JAR_FILE=./target/shopping-cart-ms.jar -t nkgcontainerregistryeastasia.azurecr.io/shopping-cart-ms ./
+
+# login & logout
+sudo docker login nkgcontainerregistryeastasia.azurecr.io -u username -p password
+sudo docker login eshopaksabfd.azurecr.io -u username -p password
+sudo docker logout
+
+# docker compose 
+docker-compose up
+docker-compose up -d
+docker-compose down
+
+# Monitoring
+ps -aux | grep 'java\|CPU\|npm'
+sudo docker stats checkout-ms-2b order-ms-2b payment-ms-2b catalog-ms apigateway
+sudo systemctl restart docker
+
+#登入 container 中的 zookeeper 執行介面
+sudo docker run -it --rm --link zookeeper:zookeeper zookeeper zkCli.sh -server zookeeper
+
+#用 putty 登入 container 
+sudo docker exec -it zookeeper-2181 /bin/bash
+
+
+# 更新 docker-compose 裡面單一的 MS （此方法不適用 network_mode: "service:[svc name]"）
+sudo docker-compose rm -sf <service-name>
+sudo docker-compose up -d <service-name>
+
+# zookeeper -----------------------------
+sudo docker run --name zookeeper-2181 -v ~/volumes/zookeeper-2181/data:/data -d -p 2888:2888 -p 3888:3888 -p 2181:2181 zookeeper:3.4.13
+#sudo docker run --name zookeeper-2181 -v ~/volumes/zookeeper-2181/conf:/conf -p 2888:2888 -p 3888:3888 -p 2181:2181 zookeeper:3.4.13
+sudo docker run --name zookeeper --restart always -d -p 2888:2888 -p 3888:3888 -p 2181:2181 zookeeper:3.4.13
+sudo docker run --name zookeeper-2181 --restart always -d -v ~/volumes/zookeeper-2181/conf:/conf -p 2888:2888 -p 3888:3888 -p 2181:2181 zookeeper:3.4.13
+sudo docker run --name zookeeper-2181 --restart always -d -p 2888:2888 -p 3888:3888 -p 2181:2181 zookeeper:3.4.13
+
+#開啟另一個 ZK 並串接另一個
+sudo docker run --name zookeeper -d -e "ZOO_SERVER_ID=1" -p 8080:2181 -p 2888:2888 -p 3888:3888 zookeeper:3.4.13
+sudo docker run --name zookeeper2 -d -e "ZOO_SERVER_ID=2" -e "ZOO_SERVERS=172.17.0.2:2888:3888" -p 2181:2181 zookeeper:3.4.13
+
+#觀測 zookeeper 的狀態
+echo stat | nc 172.17.0.1 2182
+echo stat | nc 172.17.0.1 2181
+echo mntr | nc 172.17.0.1 8080
+echo isro | nc 172.17.0.1 8080
+
+# kafka ---------------- 
+sudo docker rm -f kafka_kafka1_1 kafka_zoo1_1
+sudo docker-compose -p kafka -f ./docker-compose-kafka.yml up -d
+sudo docker-compose -p kafka -f ./docker-compose-kafka.yml start -d
+
+
+Redis ----------------------------------
+sudo docker run --name eshop-redis -v ~/volumes/eshop-redis/data:/data -d redis:5.0.2 redis-server --appendonly yes
+sudo docker run --name eshop-redis -v ~/volumes/eshop-redis/data:/data -d redis:5.0.2-alpine redis-server --appendonly yes
+sudo docker run --name eshop-redis -v ~/volumes/eshop-redis/data:/data -p 6379:6379 -d redis:5.0.2-alpine redis-server --appendonly yes
+sudo docker run -it --rm --link eshop-redis:redis zookeeper zkCli.sh -server zookeeper
+docker run -it --link eshop-redis:redis --rm redis:redis:5.0.2-alpine redis-cli -h redis -p 6379
+      - SPRING_REDIS_HOST=10.2.131.187
+
+# TAG name change
+docker tag dante0312/checkoutms nkgcontainerregistryeastasia.azurecr.io/nkgContainerRegistryEastAsia/checkoutms
+sudo docker tag 3947627e8efa nkgcontainerregistryeastasia.azurecr.io/promotion-ms:stable-prod
+	  
