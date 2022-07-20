@@ -2,6 +2,8 @@
 > 
 > Base on version ????
 
+- [深入浅出理解基于 Kafka 和 ZooKeeper 的分布式消息队列](https://gitbook.cn/books/5ae1e77197c22f130e67ec4e/index.html)
+
 - [Docker – (8) 用Docker建立Kafka服務](https://cutejaneii.wordpress.com/2017/06/19/docker-7-%E7%94%A8docker%E5%BB%BA%E7%AB%8Bkafka%E6%9C%8D%E5%8B%99%E4%B8%8A/)
 
 - [Kafka剖析（一）：Kafka背景及架构介绍](http://www.infoq.com/cn/articles/kafka-analysis-part-1)
