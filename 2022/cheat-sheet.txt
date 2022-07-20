@@ -1,0 +1,112 @@
+# for stage machine (Azure http://eshop-ms.eastus.cloudapp.azure.com)
+docker run --name payment-ms -d -p 8097:8097 nkgcontainerregistryeastasia.azurecr.io/payment-ms:latest
+docker run --name payment-ms -p 8097:8097 nkgcontainerregistryeastasia.azurecr.io/payment-ms:latest
+docker pull eshopaksabfd.azurecr.io/catalog-ms:latest
+docker pull eshopcloudacr.azurecr.io/order-ms-2b:latest
+
+
+# manual docker build -------------------
+docker build --build-arg JAR_FILE=./target/shopping-cart-ms.jar -t nkgcontainerregistryeastasia.azurecr.io/shopping-cart-ms ./
+
+
+# others ------------------------------
+
+sudo docker login nkgcontainerregistryeastasia.azurecr.io
+sudo docker login nkgcontainerregistryeastasia.azurecr.io -u nkgContainerRegistryEastAsia -p mecJo6IDbgraiMcMco83dvk8KDcJ/hsW
+sudo docker login eshopaksabfd.azurecr.io -u eshopaksabfd -p M7LS0/GuCVlOVnEm0rX0GTZh09lCqILs
+sudo docker logout
+
+docker-compose up
+docker-compose up -d
+
+ps -aux | grep 'java\|CPU\|npm'
+sudo docker stats checkout-ms-2b order-ms-2b payment-ms-2b catalog-ms apigateway
+sudo systemctl restart docker
+
+
+# 顯示使用空間
+du -sh ./apigateway/ ./order/ ./payment/ ./promotion/ ./catalog/
+df -h
+
+
+zookeeper -----------------------------
+sudo docker run --name zookeeper-2181 -d -v ~/volumes/zookeeper-2181/data:/data -p 2888:2888 -p 3888:3888 -p 2181:2181 zookeeper:3.4.13
+sudo docker run --name zookeeper-2181 --restart always -d -v ~/volumes/zookeeper-2181/conf:/conf -p 2888:2888 -p 3888:3888 -p 2181:2181 zookeeper:3.4.13
+
+
+#登入 container 中的 zookeeper 執行介面
+sudo docker run -it --rm --link zookeeper:zookeeper zookeeper zkCli.sh -server zookeeper
+
+
+#用 putty 登入 container 
+sudo docker exec -it zookeeper-2181 /bin/bash
+
+
+#開啟另一個 ZK 並串接另一個
+sudo docker run --name zookeeper -d -e "ZOO_SERVER_ID=1" -p 8080:2181 -p 2888:2888 -p 3888:3888 zookeeper:3.4.13
+sudo docker run --name zookeeper2 -d -e "ZOO_SERVER_ID=2" -e "ZOO_SERVERS=172.17.0.2:2888:3888" -p 2181:2181 zookeeper:3.4.13
+
+docker run --name zookeeper  -d -h zoo1 -e "ZOO_MY_ID:4" -e "ZOO_SERVERS:server.1=192.168.99.1:2887:3887 server.4=192.168.99.1:2988:3988" -p 2181:2181 -p 2988:2888 -p 3988:3888 zookeeper:3.4.13
+docker run --name zookeeper2 -d -h zoo2 -e "ZOO_MY_ID:2" -e "ZOO_SERVERS:server.1=zoo1:2888:3888 server.2=zoo2:2888:3888" -p 2181:2181 zookeeper:3.4.13
+
+
+#觀測 zookeeper 的狀態
+echo stat | nc 172.17.0.1 2181
+echo mntr | nc 172.17.0.1 8080
+echo isro | nc 172.17.0.1 8080
+echo stat | nc eshop-ms.eastus.cloudapp.azure.com 2181
+
+
+Redis ----------------------------------
+sudo docker run --name eshop-redis -v ~/volumes/eshop-redis/data:/data -d redis:5.0.2 redis-server --appendonly yes
+sudo docker run --name eshop-redis -v ~/volumes/eshop-redis/data:/data -d redis:5.0.2-alpine redis-server --appendonly yes
+sudo docker run --name eshop-redis -v ~/volumes/eshop-redis/data:/data -p 6379:6379 -d redis:5.0.2-alpine redis-server --appendonly yes
+sudo docker run -it --rm --link eshop-redis:redis zookeeper zkCli.sh -server zookeeper
+docker run -it --link eshop-redis:redis --rm redis:redis:5.0.2-alpine redis-cli -h redis -p 6379
+
+
+Linux ------
+sudo sh clean_log.sh volumes/
+sudo curl -H "check-code:newkinpo" "http://localhost:8096/tax/checkTaxCloud"
+
+
+Azure VM 那台定期可能要清log -----------------------------
+先執行 sudo su 
+檔案位置:
+/var/lib/docker/containers/a92e650a49519e12717cd9fbd23cc7c22008d55d8d91baabdc93226e5ce302c3
+執行指令:
+cat /dev/null > a92e650a49519e12717cd9fbd23cc7c22008d55d8d91baabdc93226e5ce302c3-json.log
+
+刪除大於指定檔案大小的檔案
+sudo rm -f `find ./*/tmp/logs/* -size +5k`
+sudo rm -f `find ./* -size +5000k`
+
+
+DOCKER LOGS ----------------------------------
+查看指定时间后的日志，只显示最后100行：
+docker logs -f -t --since="2021-11-29" --tail=100 CONTAINER_ID
+
+查看最近30分钟的日志:
+docker logs --since 30m CONTAINER_ID
+
+查看某时间之后的日志：
+docker logs -t --since="2018-02-08T13:23:37" CONTAINER_ID
+
+查看某时间段日志：
+docker logs -t --since="2018-02-08T13:23:37" --until "2018-02-09T12:23:37" CONTAINER
+
+
+# TAG name change
+docker tag dante0312/checkoutms nkgcontainerregistryeastasia.azurecr.io/nkgContainerRegistryEastAsia/checkoutms
+sudo docker tag 3947627e8efa nkgcontainerregistryeastasia.azurecr.io/promotion-ms:stable-prod
+	  
+更新 docker-compose 裡面單一的 MS （此方法不適用 network_mode: "service:[svc name]"）
+
+sudo docker-compose rm -sf <service-name>
+sudo docker-compose up -d <service0-name>
+
+
+ps -aux | grep 'java\|CPU\|npm'
+sudo docker stats checkout-ms-2b order-ms-2b payment-ms-2b catalog-ms apigateway
+sudo systemctl restart docker
+
